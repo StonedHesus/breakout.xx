@@ -4,9 +4,11 @@ BUILD 	:= ./build
 SRC 	:= ./src
 
 CC		:= zig c++
+RM		:= rm -rf
 EXEC_N	:= breakout
 
-run:
+
+run: build
 	@$(BUILD)/$(EXEC_N)
 
 build: main
@@ -14,8 +16,8 @@ build: main
 	@mv breakout $(BUILD)
 
 main: $(SRC)/main.cxx
-	@$(CC) $(SRC)/main.cxx -o $(EXEC_N)
+	@$(CC) $< -o $(EXEC_N)
 
-clean:
-	@test -d $(BUILD) && rm -rf $(BUILD)
+clean: build
+	@test -d $(BUILD) && $(RM) $(BUILD)
 
